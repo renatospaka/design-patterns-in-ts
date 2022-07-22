@@ -29,11 +29,15 @@ export default class Order {
       throw new Error("order items list cannot be empty");
     }
 
+    if (this._items.some(item => item.quantity <= 0)) {
+      throw new Error("quantity must be greater than zero");
+    }
+
     this._active = true;
   }
 
   total(): number {
-    return this._items.reduce((acc, item) => acc + item._price, 0);
+    return this._items.reduce((acc, item) => acc + item.price, 0);
   }
 
   isActive(): boolean {
