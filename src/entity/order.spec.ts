@@ -30,6 +30,11 @@ describe("Order unit tests", () => {
     const order2 = new Order("o2", "2", [item1, item2]);
     total = order2.total();
     expect(total).toBe(300);
+  });
 
+  it("should be active", () => {
+    const item1 = new OrderItem("i1", "Item 1", 100);
+    const order = new Order("o1", "1", [item1]);
+    expect(order.isActive()).toBe(true);
   });
 });

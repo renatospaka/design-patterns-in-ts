@@ -35,4 +35,8 @@ export default class Order {
   total(): number {
     return this._items.reduce((acc, item) => acc + item._price, 0);
   }
+
+  isActive(): boolean {
+    return this._active;
+  }
 }
