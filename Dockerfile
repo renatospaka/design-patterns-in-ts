@@ -6,7 +6,7 @@ RUN apk add --no-cache bash curl && \
 
 WORKDIR /home/node/app
 
-RUN npm install npm@8.15.0 --location=global && \
+RUN npm install npm@8.15.1 --location=global && \
     npm install typescript --save-dev && \
     npm install nodemon --location=global
 
