@@ -18,7 +18,7 @@
     "uuid": "^8.3.2"
   },
   "scripts": {
-    "test": "npm run tsc -- --noEmit && jest",
+    "test": "clear && npm run tsc -- --noEmit && jest",
     "tsc": "tsc"
   }
 }
