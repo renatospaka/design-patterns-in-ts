@@ -27,6 +27,18 @@ export default class Customer {
     this._name = name;
   }
 
+  changeAddress(address: Address) {
+    this._address = address;
+  }
+
+  set Address(address: Address) {
+    this._address = address;
+  }
+
+  get Address(): Address {
+    return this._address;
+  }
+
   activate() {
     if (this._address === undefined) {
       throw new Error("address is mandatory to activate customer");      
@@ -58,9 +70,5 @@ export default class Customer {
     if (this._name.length === 0) {
       throw new Error("name is required");      
     }
-  }
-
-  Address(address: Address) {
-    this._address = address;
   }
 }
