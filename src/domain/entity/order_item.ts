@@ -32,4 +32,8 @@ export default class OrderItem {
   get productId(): string {
     return this._productId;
   }
+
+  changeQuantity(plus: number) {
+    this._quantity += plus;
+  }
 }

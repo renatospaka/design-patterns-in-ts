@@ -71,4 +71,92 @@ describe("Order repository test", () => {
       ],
     });
   });
+
+  it("should update an order", async () => {
+    const customerRepository = new CustomerRepository();
+    const customer = new Customer("123", "Customer 1");
+    const address = new Address("Street 1", 1, "Zipcode 1", "City 1");
+    customer.changeAddress(address);
+    await customerRepository.create(customer);
+
+    const productRepository = new ProductRepository();
+    const product = new Product("123", "Product 1", 10);
+    await productRepository.create(product);
+
+    const orderItem = new OrderItem("1", product.name, product.price, product.id, 2);
+    const order = new Order("o123", customer.id, [orderItem]);
+
+    const orderRepository = new OrderRepository();
+    await orderRepository.create(order);
+
+    orderItem.changeQuantity(2);
+    await orderRepository.update(order);
+
+    const updatedOrderModel = await OrderModel.findOne(
+      {
+        where: { id: order.id },
+        include: ["items"],
+      }
+    );
+    console.log(updatedOrderModel.id, updatedOrderModel.items[0].quantity, updatedOrderModel.items[0].price)
+
+    expect(updatedOrderModel.toJSON()).toStrictEqual({      
+      id: order.id,
+      customer_id: customer.id,
+      total: 40,
+      items: [
+        {
+          id: orderItem.id,
+          name: orderItem.name,
+          price: orderItem.price,
+          quantity: 4,
+          product_id: orderItem.productId,
+          order_id: order.id
+        }
+      ],
+    });
+  });
+
+  // it("should find an order", async () => {
+  //   const customerRepository = new CustomerRepository();
+  //   const customer = new Customer("123", "Customer 1");
+  //   const address = new Address("Street 1", 1, "Zipcode 1", "City 1");
+  //   customer.changeAddress(address);
+  //   await customerRepository.create(customer);
+
+  //   const productRepository = new ProductRepository();
+  //   const product = new Product("123", "Product 1", 10);
+  //   await productRepository.create(product);
+
+  //   const orderItem = new OrderItem("1", product.name, product.price, product.id, 2);
+  //   const order = new Order("o123", customer.id, [orderItem]);
+
+  //   const orderRepository = new OrderRepository();
+  //   await orderRepository.create(order);
+
+  //   const orderModel = await OrderModel.findOne(
+  //     {
+  //       where: { id: order.id },
+  //       include: ["items"],
+  //     }
+  //   );
+
+    // const foundOrder = await orderRepository.find(order.id);
+    
+    // expect(orderModel.toJSON()).toStrictEqual({      
+    //   id: foundOrder.id,
+    //   customer_id: foundOrder.id,
+    //   total: foundOrder.total(),
+    //   items: [
+    //     {
+    //       id: foundOrder.items[0].id,
+    //       name: foundOrder.items[0].name,
+    //       price: foundOrder.items[0].price,
+    //       quantity: foundOrder.items[0].quantity,
+    //       product_id: foundOrder.items[0].productId,
+    //       order_id: foundOrder.items[0].id
+    //     }
+    //   ],
+    // });
+  // });
 });
