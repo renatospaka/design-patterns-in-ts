@@ -32,9 +32,9 @@ export default class Customer {
     this._address = address;
   }
 
-  set Address(address: Address) {
-    this._address = address;
-  }
+  // set Address(address: Address) {
+  //   this._address = address;
+  // }
 
   get Address(): Address {
     return this._address;
