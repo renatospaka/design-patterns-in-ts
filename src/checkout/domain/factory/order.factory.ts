@@ -1,5 +1,5 @@
-import Order from "../domain/entity/order";
-import OrderItem from "../domain/entity/order_item";
+import Order from "../entity/order";
+import OrderItem from "../entity/order_item";
 
 interface OrderFactoryProps {
   id: string;
