@@ -13,8 +13,8 @@ const MockRepository = () => {
     findAll: jest.fn(),
     create: jest.fn(),
     update: jest.fn(),
-  }
-}
+  };
+};
 
 describe("Unit test find customer usecase", () => {
   it("should find a customer", async () => {
