@@ -29,4 +29,20 @@ describe("Unit test find product usecase", () => {
 
     expect(result).toEqual(output);
   });
+
+  it("should not find a product", async () => {
+    const productRepository = MockRepository();
+    productRepository.find.mockImplementation(() => {
+      throw new Error("product not found");      
+    });
+    const findProduct = new FindProductUsecase(productRepository);
+
+    const input =  {
+      id: "p1",
+    };
+
+    expect(() => {
+      return findProduct.execute(input);
+    }).rejects.toThrow("product not found");
+  });
 });
