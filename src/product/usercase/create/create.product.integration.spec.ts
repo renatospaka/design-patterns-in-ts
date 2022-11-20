@@ -45,7 +45,7 @@ describe("Test create product usecase", () => {
     const productRepository = new ProductRepository();
     const createProduct = new CreateProductUsecase(productRepository);
     
-    input.id = "",
+    input.id = "";
     await expect(createProduct.execute(input)).rejects.toThrow("id is required");
   });
 });
