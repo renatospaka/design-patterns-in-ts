@@ -1,4 +1,4 @@
-import Address from "./address";
+import Address from "../valueobject/address";
 import Customer from "./customer";
 
 describe("Customer unit tests", () => {
@@ -28,7 +28,7 @@ describe("Customer unit tests", () => {
   it("should activate customer", () => {
     const customer = new Customer("1", "Customer 1");
     const address = new Address("Street 1", 123, "90909-909", "Sampa");
-    customer.Address(address);
+    customer.changeAddress(address);
     customer.activate();
 
     expect(customer.isActive()).toBe(true);
@@ -46,5 +46,16 @@ describe("Customer unit tests", () => {
       const customer = new Customer("1", "Customer 1");
       customer.activate();
     }).toThrowError("address is mandatory to activate customer")
+  });
+
+  it("should add reward points", () => {
+    const customer = new Customer("1", "Customer 1");
+    expect(customer.rewardPoints).toBe(0);
+
+    customer.addRewardPoints(10);
+    expect(customer.rewardPoints).toBe(10);
+
+    customer.addRewardPoints(10);
+    expect(customer.rewardPoints).toBe(20);
   });
 });

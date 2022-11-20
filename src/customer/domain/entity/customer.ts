@@ -1,16 +1,23 @@
-import Address from "./address";
+// import Address from "../valueobject/address";
+import Address from "../valueobject/address";
 
 export default class Customer {
   private _id: string;
   private _name: string;
   private _address!: Address;
   private _active: boolean = false;
+  private _rewardPoints: number = 0;
 
   constructor(id: string, name: string) {
     this._id = id;
     this._name = name;
     this._active = false;
+    this._rewardPoints = 0;
     this.validate();
+  }
+
+  get id(): string {
+    return this._id;
   }
 
   get name(): string {
@@ -19,6 +26,18 @@ export default class Customer {
 
   changeName(name: string) {
     this._name = name;
+  }
+
+  changeAddress(address: Address) {
+    this._address = address;
+  }
+
+  // set Address(address: Address) {
+  //   this._address = address;
+  // }
+
+  get Address(): Address {
+    return this._address;
   }
 
   activate() {
@@ -36,6 +55,14 @@ export default class Customer {
     return this._active;
   }
 
+  addRewardPoints(points: number): void {
+    this._rewardPoints += points;
+  }
+
+  get rewardPoints(): number {
+    return this._rewardPoints;
+  }
+
   validate() {
     this._active = false
     if (this._id.length === 0) {
@@ -44,9 +71,5 @@ export default class Customer {
     if (this._name.length === 0) {
       throw new Error("name is required");      
     }
-  }
-
-  Address(address: Address) {
-    this._address = address;
   }
 }
