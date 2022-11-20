@@ -23,7 +23,7 @@ describe("Order repository test", () => {
       sync: { force: true },
     });
 
-    sequelize.addModels([CustomerModel, ProductModel, OrderModel, OrderItemModel]);
+    await sequelize.addModels([CustomerModel, ProductModel, OrderModel, OrderItemModel]);
     await sequelize.sync();
   });
 
@@ -191,7 +191,7 @@ describe("Order repository test", () => {
     await orderRepository.create(order2);
 
     const orders = [order1, order2];
-    const allOrders = orderRepository.findAll();
+    const allOrders = await orderRepository.findAll();
 
     expect(orders).toEqual(allOrders);
   });
