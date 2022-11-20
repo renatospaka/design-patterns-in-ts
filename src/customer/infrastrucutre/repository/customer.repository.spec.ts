@@ -15,7 +15,7 @@ describe("Customer repository test", () => {
       sync: { force: true },
     });
 
-    sequelize.addModels([CustomerModel]);
+    await sequelize.addModels([CustomerModel]);
     await sequelize.sync();
   });
 
