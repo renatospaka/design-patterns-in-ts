@@ -44,10 +44,9 @@ const MockRepository = () => {
 describe("Unit test update customer usecase", () => {
   it("should update a customer", async () => {
     const customerRepository = MockRepository();
-    const updateCustomerUsecase = new UpdateCustomerUsecase(customerRepository);
+    const updateCustomer = new UpdateCustomerUsecase(customerRepository);
 
-    const output =  await updateCustomerUsecase.execute(input);
-
+    const output =  await updateCustomer.execute(input);
     expect(output).toEqual(input)
   });
 });
