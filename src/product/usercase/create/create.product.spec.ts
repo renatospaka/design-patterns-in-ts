@@ -27,4 +27,21 @@ describe("Unit test create product usecase", () => {
       price: input.price,
     });
   });
+
+  it("should throw an error when id is missing", async () => {
+    const productRepository = MockRepository();
+    const createProduct = new CreateProductUsecase(productRepository);
+    input.id = "";
+
+    await expect(createProduct.execute(input)).rejects.toThrow("id is required");
+  });
+
+  it("should throw an error when price is negative", async () => {
+    const productRepository = MockRepository();
+    const createProduct = new CreateProductUsecase(productRepository);
+    input.id = "p1";
+    input.price = -10;
+
+    await expect(createProduct.execute(input)).rejects.toThrow("price must be greater than zero");
+  });
 });
