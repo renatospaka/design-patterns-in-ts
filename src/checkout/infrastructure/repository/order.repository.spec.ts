@@ -187,7 +187,7 @@ describe("Order repository test", () => {
 
     const orderItem2 = new OrderItem("i9", product2.name, product2.price, product2.id, 5);
     const orderItem3 = new OrderItem("i10", product1.name, product1.price, product1.id, 2);
-    const order2 = new Order("o890", customer2.id, [orderItem2, orderItem3]);
+    const order2 = new Order("o890", customer2.id, [orderItem3, orderItem2]);
     await orderRepository.create(order2);
 
     const orders = [order1, order2];
