@@ -6,7 +6,7 @@ describe("E2E test for customer", () => {
     await sequelize.sync({ force: true });
   });
 
-  afterEach(async () => {
+  afterAll(async () => {
     await sequelize.close();
   });
 
